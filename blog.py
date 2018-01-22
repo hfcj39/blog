@@ -1,6 +1,6 @@
 from flask import Flask, redirect
 from flask_sqlalchemy import SQLAlchemy
-from flask.ext.bootstrap import Bootstrap
+from flask_bootstrap import Bootstrap
 import config.config_dev as config
 
 app = Flask(__name__)
