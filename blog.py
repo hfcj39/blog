@@ -1,14 +1,17 @@
 from flask import Flask, redirect
 from flask_sqlalchemy import SQLAlchemy
+from flask.ext.bootstrap import Bootstrap
 import config.config_dev as config
 
 app = Flask(__name__)
 # app.config['TRAP_HTTP_EXCEPTIONS'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = config.SQLALCHEMY_DATABASE_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = config.SQLALCHEMY_TRACK_MODIFICATIONS
-app.config["SQLALCHEMY_ECHO"] = True # echo raw sql sentence
+app.config["SQLALCHEMY_ECHO"] = True  # echo raw sql sentence
+app.config['BOOTSTRAP_SERVE_LOCAL'] = True
 # app.secret_key = config.secret
 db = SQLAlchemy(app)
+Bootstrap(app)
 
 @app.route('/')
 def test():
@@ -22,13 +25,12 @@ import routes.error
 #     return render_template('error.html')
 
 
-import routes
-app.register_blueprint(routes.index, url_prefix='/index')
+from routes import index
+
+app.register_blueprint(index, url_prefix='/index')
 app.register_blueprint(routes.error.error)
 
-
 import init_db
-
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,14 +1,9 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>尘封的次元</title>
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/index.css') }}" type="text/css" media="screen" />
-</head>
-<body>
-    <div id="particles-js"></div>
+{% extends "base.html" %}
+{% block content %}
+        <div class="center">
+            <img class="avatar" src = "{{ url_for('static',filename='img/avatar.jpg') }}"><br>
+            <h2 class="text-index">尘封</h2><br>
+            <p class="text-index">这里是世界线 β……</p>
+        </div>
 
-
-    <script type="text/javascript" src="{{ url_for('static',filename='js/particles.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static',filename='js/index.js') }}"></script>
-</body>
-</html>
+{% endblock content %}
