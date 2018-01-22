@@ -10,7 +10,6 @@ app.config["SQLALCHEMY_ECHO"] = True # echo raw sql sentence
 # app.secret_key = config.secret
 db = SQLAlchemy(app)
 
-
 @app.route('/')
 def test():
     return redirect('/index')
