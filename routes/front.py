@@ -10,3 +10,8 @@ def _index():
 @index.route('/tst')
 def t():
     return render_template('test.html')
+
+
+@index.route('/blog')
+def blog():
+    return render_template('blog.html')
