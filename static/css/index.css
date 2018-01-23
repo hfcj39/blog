@@ -75,6 +75,7 @@
 
 .main{
     margin-top: 100px;
+    /*min-height: 500px;*/
 }
 
 .pagination{
@@ -99,4 +100,21 @@ h4{
 .panel{
     text-align: center;
     display: block;
+}
+
+a{
+    text-decoration: none;
+}
+.link{
+    color: #cccccc;
+}
+a:hover {
+    text-decoration:none;
+    color: #ffffff;
+}
+
+.article-info{
+    position: absolute;
+    top: 60px;
+    right: 60px;
 }

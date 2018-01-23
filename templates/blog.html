@@ -6,7 +6,12 @@
         {% for blog in data.items %}
             <div class="white-background">
             <div class="page-header">
-                <h2 style="color: #ffffff;">{{ blog.title }}<small class="time">{{ blog.created_at | date('%H:%M / %Y-%m-%d') }}</small></h2>
+                <h2>
+                    <a href="{{ url_for('index.get_article',a_id=blog.id) }}" class="link">
+                        {{ blog.title }}
+                    </a>
+                    <small class="time">{{ blog.created_at | date('%Y-%m-%d  %H:%M') }}</small>
+                </h2>
             </div>
                 <p style="color: #ffffff;">{{ blog.content | truncate(512) | safe_markdown}}</p>
             </div>
