@@ -1,4 +1,20 @@
 {% extends "base.html" %}
+{% from "pagination.html" import paginate %}
 {% block content %}
-    <div class="center">test</div>
+    <div class="row col-md-10 col-md-offset-1 main">
+    <div class="col-sm-9">
+        {% for blog in data.items %}
+            <div class="white-background">
+            <div class="page-header">
+                <h2 style="color: #ffffff;">{{ blog.title }}<small class="time">{{ blog.created_at | date('%H:%M / %Y-%m-%d') }}</small></h2>
+            </div>
+                <p style="color: #ffffff;">{{ blog.content | truncate(512) | safe_markdown}}</p>
+            </div>
+        {% endfor %}
+    {{ paginate(data,'index.blog') }}
+    </div>
+    <div class="col-sm-3">
+        {% include 'panel.html' %}
+    </div>
+    </div>
 {% endblock content %}

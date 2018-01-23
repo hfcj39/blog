@@ -8,8 +8,8 @@ class Article(db.Model):
 
     title = db.Column(db.String(32), nullable=False)
     content = db.Column(db.Text)
-    classification = db.column(db.String(16))
-    visible = db.column(db.Integer)
+    classification = db.Column(db.String(16))
+    visible = db.Column(db.Integer, default=1)
 
     created_at = db.Column(db.DATETIME, default=datetime.utcnow())
     updated_at = db.Column(db.DATETIME, default=datetime.utcnow())

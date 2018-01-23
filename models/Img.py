@@ -7,8 +7,8 @@ class Img(db.Model):
 
     path = db.Column(db.String(255), nullable=False)
     text = db.Column(db.Text)
-    classification = db.column(db.String(16))
-    visible = db.column(db.Integer)
+    classification = db.Column(db.String(16))
+    visible = db.Column(db.Integer)
 
     created_at = db.Column(db.DATETIME, default=datetime.utcnow())
     updated_at = db.Column(db.DATETIME, default=datetime.utcnow())

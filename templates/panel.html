@@ -1,0 +1,24 @@
+<script type="text/javascript" src="https://cdn.bootcss.com/aplayer/1.6.0/APlayer.min.js"></script>
+<link rel="stylesheet" href="{{ url_for('static',filename='css/player.css') }}" type="text/css" media="screen" />
+
+<div class="panel panel-default white-background panel">
+    <h4>尘封</h4>
+    <img class="avatar" src = "{{ url_for('static',filename='img/avatar.jpg') }}"><br>
+    <p class="text-side" style="margin: 10px">啦啦啦~</p>
+</div>
+
+
+<div class="panel panel-default white-background panel">
+    <h4>播放器施工中...</h4>
+    <div id="player1" class="aplayer"></div>
+</div>
+
+<div class="panel panel-default white-background panel">
+    <h4>友情链接</h4>
+    <div class="panel-body">
+        <a href="http://www.snakehacker.me/" class="text-side">snakehacker</a><br>
+        <a href="http://fhiutc.me/" class="text-side">fhiutc</a>
+    </div>
+</div>
+
+<script type="text/javascript" src="{{ url_for('static',filename='js/player.js') }}"></script>
