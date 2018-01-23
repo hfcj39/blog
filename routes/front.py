@@ -20,3 +20,9 @@ def blog(page=1):
     rst = Article.query.filter_by(visible=1, delete_at=None) \
         .order_by(Article.updated_at.desc()).paginate(page, 5, True)
     return render_template('blog.html', data=rst)
+
+
+@index.route('/article/<int:a_id>')
+def get_article(a_id):
+    rst = Article.query.get(a_id)
+    return render_template('article.html', data=rst)
