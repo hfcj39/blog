@@ -1,5 +1,4 @@
 * {
-    background: black;
     margin: 0;
     padding: 0;
 }
@@ -7,10 +6,12 @@
 .navbar {
     margin-bottom: 0;
     background-color: #000000;
+    z-index: 50;
 }
 
 #particles-js {
     /*height: 800px;*/
+    background: black;
     position: fixed;
     top: 0;
     bottom: 0;
@@ -49,6 +50,9 @@
 .avatar{
     border-radius: 50%;
     width: 128px;
+    /*clear: both;*/
+    /*display: block;*/
+    /*margin: auto;*/
 }
 
 .list-inline{
@@ -58,4 +62,41 @@
 
 .none-background{
     background-color: rgba(255,255,255,0);
+}
+
+.white-background{
+    background-color: rgba(255,255,255,0.5);
+    border-radius: 5px;
+    border: white;
+    margin-top: 32px;
+    padding: 20px;
+    /*min-height: 200px;*/
+}
+
+.main{
+    margin-top: 100px;
+}
+
+.pagination{
+    margin-bottom: 100px;
+    z-index: 0;
+}
+
+.time{
+    color: #5d5e5d;
+    float: right;
+    font-size: 16px;
+}
+
+.text-side{
+    color: azure;
+}
+
+h4{
+    text-align: center;
+}
+
+.panel{
+    text-align: center;
+    display: block;
 }

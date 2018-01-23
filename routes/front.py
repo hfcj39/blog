@@ -1,4 +1,6 @@
 from . import index
+from blog import db
+from models.Article import Article
 from flask import render_template
 
 
@@ -13,5 +15,8 @@ def t():
 
 
 @index.route('/blog')
-def blog():
-    return render_template('blog.html')
+@index.route('/blog/<int:page>')
+def blog(page=1):
+    rst = Article.query.filter_by(visible=1, delete_at=None) \
+        .order_by(Article.updated_at.desc()).paginate(page, 5, True)
+    return render_template('blog.html', data=rst)

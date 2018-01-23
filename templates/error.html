@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>error</title>
-</head>
-<body>
-{{code}}
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+<div class="center">
+    <p class="text-index">报错啦</p><br>
+    <p class="text-index">代码:{{data.code}}</p>
+    <p class="text-index">{{data.msg}}</p>
+</div>
+{% endblock content %}

@@ -31,6 +31,11 @@ app.register_blueprint(index, url_prefix='/index')
 app.register_blueprint(routes.error.error)
 
 import init_db
+from middleware.filter import *
+
+env = app.jinja_env
+env.filters['date'] = datetimeformat
+env.filters['safe_markdown'] = safe_markdown
 
 if __name__ == '__main__':
     app.run(debug=True)
