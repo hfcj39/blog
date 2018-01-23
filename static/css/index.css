@@ -50,3 +50,12 @@
     border-radius: 50%;
     width: 128px;
 }
+
+.list-inline{
+    list-style: none;
+    background-color: rgba(255,255,255,0);
+}
+
+.none-background{
+    background-color: rgba(255,255,255,0);
+}
