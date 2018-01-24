@@ -4,7 +4,7 @@ import os
 # DATABASE_PASSWORD = 'root'
 # DATABASE_URL = 'localhost:3306'
 
-basedir = os.path.abspath(os.path.dirname(__file__))[0:-7]
+basedir = os.path.abspath(os.path.dirname(__file__)).rsplit('\\', 1)[0]
 print('database_path:'+basedir)
 
 # sqlite
@@ -18,6 +18,6 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'database.db')
 
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-SQLALCHEMY_POOL_SIZE = 50
+SQLALCHEMY_POOL_SIZE = 10
 
 secret = 'aGVsbG8gd29ybGQ='
