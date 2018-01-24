@@ -13,6 +13,17 @@
     <div id="player1" class="aplayer"></div>
 </div>
 
+<div class="white-background">
+    <h4>文章分类</h4>
+    {% for foo in classes %}
+        <span class="label label-default">
+        <a href="{{ url_for('index.classification',c_id=foo.id) }}" class="link">
+            {{ foo.classification }}
+        </a>
+        </span>
+    {% endfor %}
+</div>
+
 <div class="panel panel-default white-background panel">
     <h4>友情链接</h4>
     <div class="panel-body">

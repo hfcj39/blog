@@ -73,6 +73,11 @@
     /*min-height: 200px;*/
 }
 
+.white-background>span{
+    display: inline-block;
+    margin-bottom: 4px;
+}
+
 .main{
     margin-top: 100px;
     margin-bottom: 100px;
