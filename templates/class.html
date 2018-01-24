@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% from "pagination.html" import paginate %}
+{% block content %}
+    <div class="row col-md-10 col-md-offset-1 main">
+        <div class="col-sm-9">
+            {% for blog in data.items %}
+                <div class="white-background auto-width">
+                    <div class="page-header">
+                        <h2>
+                            <a href="{{ url_for('index.get_article',a_id=blog.id) }}" class="link">
+                                {{ blog.title }}
+                            </a>
+                            <small class="time">{{ blog.created_at | date('%Y-%m-%d  %H:%M') }}</small>
+                        </h2>
+                    </div>
+                    <p style="color: #ffffff;">{{ blog.content | truncate(512) | safe_markdown}}</p>
+                </div>
+            {% endfor %}
+        {% if data.pages>1 %}
+            <ul class="pager">
+                {% if data.has_prev %}
+                    <li><a href="{{ url_for('index.classification',c_id=c_id,page=data.prev_num) }}">Previous</a></li>
+                {% endif %}
+            {% if data.has_next %}
+                <li><a href="{{ url_for('index.classification',c_id=c_id,page=data.next_num) }}">Next</a></li>
+            {% endif %}
+            </ul>
+        {% endif %}
+
+        </div>
+        <div class="col-sm-3">
+            {% include 'panel.html' %}
+        </div>
+    </div>
+{% endblock content %}

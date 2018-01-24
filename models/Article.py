@@ -8,7 +8,7 @@ class Article(db.Model):
 
     title = db.Column(db.String(32), nullable=False)
     content = db.Column(db.Text)
-    classification = db.Column(db.String(16))
+    classification = db.Column(db.String, db.ForeignKey('classes.classification'))
     visible = db.Column(db.Integer, default=1)
 
     created_at = db.Column(db.DATETIME, default=datetime.utcnow())
