@@ -1,7 +1,6 @@
 from flask import Flask, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
-from flask_admin import Admin
 import config.config_dev as config
 
 app = Flask(__name__)
@@ -13,8 +12,8 @@ app.config['BOOTSTRAP_SERVE_LOCAL'] = True
 # app.secret_key = config.secret
 db = SQLAlchemy(app)
 Bootstrap(app)
-admin = Admin(app, name = 'Blog', template_mode = 'bootstrap3')
-
+from routes.admin import admin
+admin.init_app(app)
 
 @app.route('/')
 def test():
@@ -43,4 +42,4 @@ env.filters['date'] = datetimeformat
 env.filters['safe_markdown'] = safe_markdown
 
 if __name__ == '__main__':
-    app.run(debug=True, host = '127.0.0.1', port = 8000)
+    app.run(debug = True, host = '127.0.0.1', port = 8000)
