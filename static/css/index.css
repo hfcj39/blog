@@ -75,7 +75,8 @@
 
 .main{
     margin-top: 100px;
-    /*min-height: 500px;*/
+    margin-bottom: 100px;
+    word-break: break-all;
 }
 
 .pagination{
@@ -118,3 +119,10 @@ a:hover {
     top: 60px;
     right: 60px;
 }
+
+div.auto-width>p>img{
+    width: 100%;
+}
+/*div.auto-width>img{*/
+    /*width: 100%;*/
+/*}*/
