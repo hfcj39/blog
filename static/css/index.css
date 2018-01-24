@@ -80,7 +80,7 @@
 
 .main{
     margin-top: 100px;
-    margin-bottom: 100px;
+    margin-bottom: 80px;
     word-break: break-all;
 }
 
@@ -131,3 +131,18 @@ div.auto-width>p>img{
 /*div.auto-width>img{*/
     /*width: 100%;*/
 /*}*/
+
+.cmt-main{
+    margin-top: 0;
+    margin-bottom: 100px;
+}
+
+.comment{
+    padding: 20px;
+    margin: 10px;
+    border: solid;
+}
+
+.btn{
+    margin-top: 10px;
+}
