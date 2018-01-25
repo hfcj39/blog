@@ -14,6 +14,8 @@ else:
     db.create_all()
     db.session.add(User.User(username='admin', password='admin'))
     db.session.add(Classes.Classes(classification=u'默认分类'))
+    db.session.add(Classes.Classes(classification=u'about'))
+    db.session.add(Article.Article(user_id=1, title='Hello World', content=u'## 这是一篇样例', classification=u'about'))
     for i in range(50):
         db.session.add(Article.Article(user_id=1, title='Hello World', content=u'## 这是一篇样例', classification=u'默认分类'))
         db.session.add(Img.Img(path=str(i+1) + '.jpg', text='test'))
