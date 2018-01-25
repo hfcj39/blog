@@ -1,0 +1,29 @@
+{% extends 'admin/master.html' %}
+{% block body %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/editormd.min.css') }}" />
+    <div id="editormd">
+        <label>
+            <textarea class="text" style="display:none;"></textarea>
+        </label>
+    </div>
+
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="{{ url_for('static',filename='js/editormd.min.js') }}"></script>
+    <script type="text/javascript">
+        $(function() {
+            var editor = editormd("editormd", {
+                width:'100%',
+                height:'700px',
+                syncScrolling : "single",
+                theme:"dark",
+                editorTheme: "pastel-on-dark",
+                previewTheme:"dark",
+                path : "{{ url_for('static',filename='editormd/lib/') }}", // Autoload modules mode, codemirror, marked... dependents libs path
+                //启动本地图片上传功能
+                // imageUpload:false,
+                // imageFormats   : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                // imageUploadURL : "{{url_for('index._index')}}"
+            });
+        });
+    </script>
+{% endblock %}

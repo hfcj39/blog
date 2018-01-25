@@ -3,6 +3,7 @@ from . import index
 from blog import db
 from models.Article import Article
 from models.User import User
+from models.Img import Img
 from models.Comment import Comment
 from models.Classes import Classes
 from flask import render_template, abort, request
@@ -61,3 +62,9 @@ def sub_comment():
         return '0'
     else:
         return '1'
+
+
+@index.route('/pictures')
+def pic():
+    img_list = Img.query.filter_by(visible=1, delete_at=None).all()
+    return render_template('pictures.html', list=img_list)
