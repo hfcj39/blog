@@ -1,6 +1,7 @@
 from flask import Flask, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
+from flask_login import LoginManager
 import config.config_dev as config
 
 app = Flask(__name__)
@@ -9,11 +10,16 @@ app.config['SQLALCHEMY_DATABASE_URI'] = config.SQLALCHEMY_DATABASE_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = config.SQLALCHEMY_TRACK_MODIFICATIONS
 app.config["SQLALCHEMY_ECHO"] = True  # echo raw sql sentence
 app.config['BOOTSTRAP_SERVE_LOCAL'] = True
-# app.secret_key = config.secret
+app.secret_key = config.secret
 db = SQLAlchemy(app)
 Bootstrap(app)
+
 from routes.admin import admin
 admin.init_app(app)
+
+login_manager = LoginManager()
+login_manager.session_protection = 'strong'
+login_manager.init_app(app)
 
 @app.route('/')
 def test():
