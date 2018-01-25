@@ -14,14 +14,9 @@ app.secret_key = config.secret
 db = SQLAlchemy(app)
 Bootstrap(app)
 
-from routes.admin import admin
-
+from routes.admin import admin, login_manager
 admin.init_app(app)
-
-login_manager = LoginManager()
-login_manager.session_protection = 'strong'
 login_manager.init_app(app)
-
 
 @app.route('/')
 def test():
