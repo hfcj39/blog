@@ -146,3 +146,14 @@ div.auto-width>p>img{
 .btn{
     margin-top: 10px;
 }
+
+.wrap{
+    z-index: 1;
+    position: relative;
+    margin-top: 100px;
+    color: #aaacaa;
+}
+
+.wrap>div{
+    float:left;
+}

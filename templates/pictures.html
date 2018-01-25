@@ -1,1 +1,64 @@
 {% extends "base.html" %}
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/Pinterest.css') }}">
+{% endblock styles %}
+{% block content %}
+    <div class="row col-md-10 col-md-offset-1 wrap">
+        {% for item in list %}
+            <img src="{{ url_for('static',filename='pictures/'+item.path) }}" alt="image" data-title="{{ item.text }}"
+                 data-subtitle="{{ item.updated_at | date }}">
+        {% endfor %}
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static',filename='js/Pinterest.js') }}"></script>
+    <script>
+        $('.wrap').pinterest({
+            line: 4,
+            gap: 15,
+            responsive: [{
+                maxWidth: 1244,
+                minWidth: 769,
+                line: 3,
+                gap: 10
+            }, {
+                maxWidth: 768,
+                line: 2,
+                gap: 20
+            }, {
+                maxWidth: 400,
+                line: 1,
+                gap: 25
+            }]
+        });
+
+
+        function loadmore() {
+            let offset = $('.pinterest-img-wrap>img').length + 1;
+            console.log(offset)
+            $.post('/index/load_picture', {offset}, function (data) {
+                if (data)
+                    {#console.log(data)#}
+                    for (let pic of data.rst){
+                        {#console.log(pic)#}
+                        $('.wrap').pinterest('add', '/static/pictures/'+pic.path, pic.text,pic.updated_at)
+                    }
+            })
+        }
+
+        $(window).scroll(function () {
+            let scrollTop = $(this).scrollTop();
+            let scrollHeight = $(document).height();
+            let windowHeight = $(this).height();
+            if (scrollTop + windowHeight === scrollHeight) {
+                //调用load（）
+                loadmore()
+                {#alert("you are in the bottom");#}
+            }
+        });
+    </script>
+
+{% endblock scripts %}

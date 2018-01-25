@@ -4,7 +4,7 @@ import os
 # DATABASE_PASSWORD = 'root'
 # DATABASE_URL = 'localhost:3306'
 
-basedir = os.path.abspath(os.path.dirname(__file__)).rsplit('\\', 1)[0]
+basedir = os.path.abspath(os.path.dirname(__file__))[0:-7]
 print('database_path:'+basedir)
 
 # sqlite

@@ -1,7 +1,7 @@
 from flask_admin.contrib.sqla import ModelView
 from flask import url_for, render_template
 from flask_admin import Admin, BaseView, expose
-from blog import db,app
+from blog import db
 from models.User import User
 from models.Article import Article
 from models.Comment import Comment

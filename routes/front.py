@@ -6,7 +6,8 @@ from models.User import User
 from models.Img import Img
 from models.Comment import Comment
 from models.Classes import Classes
-from flask import render_template, abort, request
+from flask import render_template, abort, request, jsonify
+import json
 
 
 @index.route('/')
@@ -66,5 +67,20 @@ def sub_comment():
 
 @index.route('/pictures')
 def pic():
-    img_list = Img.query.filter_by(visible=1, delete_at=None).all()
+    img_list = Img.query.filter_by(visible=1, delete_at=None).order_by(Img.updated_at.desc()).limit(12)
     return render_template('pictures.html', list=img_list)
+
+
+@index.route('/load_picture', methods=["POST"])
+def get_pic():
+    offset = int(request.values.get('offset'))
+    print('offset', offset)
+    img = Img.query.filter_by(visible=1, delete_at=None).order_by(Img.updated_at.desc()).limit(8).offset(offset).all()
+    tmp = []
+    for item in img:
+        tmp.append({
+            "path": item.path,
+            "text": item.text,
+            "updated_at": item.updated_at
+        })
+    return jsonify(rst=tmp)
