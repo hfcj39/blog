@@ -1,5 +1,5 @@
 from flask_admin.contrib.sqla import ModelView
-from flask import Flask, url_for, redirect, render_template, request
+from flask import Flask, url_for, redirect, render_template, request, flash
 from flask_admin import Admin, BaseView, expose, helpers, AdminIndexView
 import flask_login as login
 from wtforms import form, fields, validators
@@ -42,7 +42,7 @@ class LoginView(ModelView):
     def is_accessible(self):
         return login.current_user.is_authenticated
 
-# Create customized index view class that handles login & registration
+
 class MyAdminIndexView(AdminIndexView):
 
     @expose('/')
@@ -57,7 +57,12 @@ class MyAdminIndexView(AdminIndexView):
         form = LoginForm(request.form)
         if helpers.validate_form_on_submit(form):
             user = form.get_user()
-            login.login_user(user)
+            try:
+                form.validate_login(self)
+                login.login_user(user)
+            except:
+                flash('Invalid username or password!!!!')
+                return redirect(url_for('.login_view'))
 
         if login.current_user.is_authenticated:
             return redirect(url_for('.index'))
