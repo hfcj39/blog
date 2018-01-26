@@ -151,6 +151,7 @@ div.auto-width>p>img{
     z-index: 1;
     position: relative;
     margin-top: 100px;
+    margin-bottom: 100px;
     color: #aaacaa;
 }
 

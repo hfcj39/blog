@@ -18,6 +18,7 @@
 	var Pinterest = function(elem, config) {
 		this.$elem = elem;
 		this.$imgs = this.$elem.find('img');
+		// console.log('imgs',this.$imgs)
 		this.images = [];
 		this.config = config;
 		this.streams = [];
@@ -80,6 +81,7 @@
 			var index = 0;
 			for (var i = 1; i < that.line; i++) {
 				var height = that.streams[i].height();
+				// console.log('列，长',i,height)
 				if (min > height) {
 					min = height;
 					index = i;
@@ -166,6 +168,7 @@
 			}
 			this.$imgs.push($img[0]);
 			var index = this.getMinStreams();
+			// console.log('当前最短',index)
 			$img.appendTo(this.streams[index]);
 			this.setTitle($img[0]);
 		},

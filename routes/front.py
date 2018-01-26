@@ -74,7 +74,6 @@ def pic():
 @index.route('/load_picture', methods=["POST"])
 def get_pic():
     offset = int(request.values.get('offset'))
-    print('offset', offset)
     img = Img.query.filter_by(visible=1, delete_at=None).order_by(Img.updated_at.desc()).limit(8).offset(offset).all()
     tmp = []
     for item in img:
@@ -84,3 +83,18 @@ def get_pic():
             "updated_at": item.updated_at
         })
     return jsonify(rst=tmp)
+
+
+@index.route('/load_one_picture', methods=["POST"])
+def get_one_pic():
+    offset = int(request.values.get('offset'))
+    img = Img.query.filter_by(visible=1, delete_at=None).order_by(Img.updated_at.desc()).offset(offset).first()
+    if img:
+        return jsonify({
+            "path": img.path,
+            "text": img.text,
+            "updated_at": img.updated_at
+        })
+    else:
+        abort(404)
+
