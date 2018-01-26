@@ -36,17 +36,31 @@
         });
 
 
-        function loadmore() {
+        /*function loadmore() {
             let offset = $('.pinterest-img-wrap>img').length + 1;
             console.log(offset)
             $.post('/index/load_picture', {offset}, function (data) {
                 if (data)
-                    {#console.log(data)#}
                     for (let pic of data.rst){
-                        {#console.log(pic)#}
-                        $('.wrap').pinterest('add', '/static/pictures/'+pic.path, pic.text,pic.updated_at)
+                        setTimeout(()=>{
+                            $('.wrap').pinterest('add', '/static/pictures/'+pic.path, pic.text,pic.updated_at)
+                            console.log('add 1 pic')
+                        },2000)
                     }
             })
+        }*/
+        //解决方案1：递归
+        async function loadmore(count) {
+            let offset = $('.pinterest-img-wrap>img').length + 1;
+            console.log(offset)
+            if(count>0){
+                let rst = await $.post('/index/load_one_picture', {offset})
+                if (rst.path){
+                    $('.wrap').pinterest('add', '/static/pictures/'+rst.path, rst.text,rst.updated_at)
+                    count--
+                    loadmore(count)
+                }
+            }
         }
 
         $(window).scroll(function () {
@@ -55,7 +69,7 @@
             let windowHeight = $(this).height();
             if (scrollTop + windowHeight === scrollHeight) {
                 //调用load（）
-                loadmore()
+                loadmore(5)
                 {#alert("you are in the bottom");#}
             }
         });
