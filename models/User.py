@@ -1,7 +1,7 @@
-# from blog import login_manager
 from blog import db
 from datetime import datetime
 from flask_login import UserMixin
+from blog import login_manager
 
 
 
@@ -16,6 +16,8 @@ class User(UserMixin, db.Model):
 
     articles = db.relationship('Article', backref='user')
 
-    # @login_manager.user_loader
-    # def load_user(user_id):
-    #     return User.query.get(int(user_id))
+    # Required for administrative interface
+    def __unicode__(self):
+        return self.username
+
+
