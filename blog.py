@@ -1,6 +1,7 @@
 from flask import Flask, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
+from flask_login import LoginManager
 import config.config_dev as config
 
 app = Flask(__name__)
@@ -12,9 +13,16 @@ app.config['BOOTSTRAP_SERVE_LOCAL'] = True
 app.secret_key = config.secret
 db = SQLAlchemy(app)
 Bootstrap(app)
-from routes.admin import admin
+login_manager = LoginManager()
 
+from routes.admin import admin
 admin.init_app(app)
+login_manager.init_app(app)
+
+from models.User import User
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 
 @app.route('/')
