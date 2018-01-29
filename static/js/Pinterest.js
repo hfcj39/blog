@@ -207,7 +207,7 @@
 		fullScreen: function() {
 			var $wrap = $("<div class='priterest-wrap'></div>");
 			var $fade = $("<div class='priterest-fade'></div>");
-			var $full_img = $("<img src=" + this.src + " class='priterest-full-img priterest-off'/>");
+			var $full_img = $("<img src=" + this.src.slice(0,-10) + ".jpg class='priterest-full-img priterest-off'/>");
 
 			//遮罩层点击事件
 			$fade.click(function() {

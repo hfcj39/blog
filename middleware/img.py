@@ -3,12 +3,14 @@ from PIL import Image, ImageDraw, ImageFont, ImageEnhance
 
 
 # 等比例压缩图片
-def resizeImg(img, dst_w=0, dst_h=0, qua=85):
-    '''''
+def resizeImg(img_path, dst_w=0, dst_h=0, qua=85):
+    """''
     只给了宽或者高，或者两个都给了，然后取比例合适的
     如果图片比给要压缩的尺寸都要小，就不压缩了
-    '''
+    """
+    img = Image.open(img_path+'.jpg')
     ori_w, ori_h = img.size
+    print('ori_w,ori_h', ori_w, ori_h)
     widthRatio = heightRatio = None
     ratio = 1
 
@@ -36,5 +38,9 @@ def resizeImg(img, dst_w=0, dst_h=0, qua=85):
         newWidth = ori_w
         newHeight = ori_h
 
-    img.resize((newWidth, newHeight), Image.ANTIALIAS).save("test5.jpg", "JPEG", quality=qua)
+    img.resize((newWidth, newHeight), Image.ANTIALIAS).save(img_path + u'@300.jpg', "JPEG", quality=qua)
     print u'等比压缩完成'
+
+
+if __name__ == "__main__":
+    resizeImg('/Users/bingpo/Desktop/python/blog/static/pictures/0x0ss-30.jpg', dst_w=300, qua=85)

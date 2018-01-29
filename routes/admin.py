@@ -12,8 +12,8 @@ from models.Article import Article
 from models.Comment import Comment
 from models.Classes import Classes
 from models.Img import Img
+from middleware.img import resizeImg
 from werkzeug.security import generate_password_hash, check_password_hash
-
 
 # login_manager = LoginManager()
 # login_manager.session_protection = 'strong'
@@ -80,30 +80,31 @@ class MyAdminIndexView(AdminIndexView):
         # self._template_args['link'] = link
         return super(MyAdminIndexView, self).index()
 
-
     @expose('/logout/')
     def logout_view(self):
         login.logout_user()
         return redirect(url_for('.index'))
+
 
 # test online MD editor
 class MyView(BaseView):
     @expose('/')
     def index(self):
         arg1 = 'Hello'
-        return self.render('editor.html', arg1 = arg1)
+        return self.render('editor.html', arg1=arg1)
 
 
 admin = Admin(name='Blog',
               base_template='my_master.html',
               index_view=MyAdminIndexView())
 
-
 admin.add_view(LoginView(User, db.session))
 admin.add_view(LoginView(Article, db.session))
 admin.add_view(LoginView(Classes, db.session))
 admin.add_view(LoginView(Comment, db.session))
 admin.add_view(LoginView(Img, db.session))
+
+
 class MyFileAdmin(BaseFileAdmin):
     def __init__(self, base_path, *args, **kwargs):
         storage = LocalFileStorage(base_path)
@@ -112,11 +113,12 @@ class MyFileAdmin(BaseFileAdmin):
     can_mkdir = False
 
     def on_file_upload(self, directory, path, filename):
-        # TODO:上传成功后修改文件名插入数据库，并且生成一份压缩后的缩略图,暂时先手动命名
+        # 上传成功后修改文件名插入数据库，并且生成一份压缩后的缩略图,暂时先手动命名
         # print('directory', directory)  # 不含文件名的路径
         # print('name', filename)  # 包含文件名的路径
-        name = filename.partition(directory+'/')[2]
-        db.session.add(Img(path=name))
+        name = filename.partition(directory + '/')[2]
+        resizeImg(filename[0:-4], dst_w=300, qua=85)
+        db.session.add(Img(path=name[0:-4]))
         db.session.commit()
 
     def on_rename(self, full_path, dir_base, filename):
@@ -129,9 +131,12 @@ class MyFileAdmin(BaseFileAdmin):
         # TODO:删除后从数据库删除
         print('full_path', full_path)  # 包含文件名的完整路径
         print('filename', filename)  # 文件名
+        img = Img.query.filter_by(path=filename).first()
+        if img:
+            db.session.delete(img)
+            db.session.commit()
 
 
 admin.add_view(MyFileAdmin(pic_path, '/static/pictures/', name='Static Files'))
 
 admin.add_view(MyView(name='Editor'))
-

@@ -6,7 +6,7 @@
 {% block content %}
     <div class="row col-md-10 col-md-offset-1 wrap">
         {% for item in list %}
-            <img src="{{ url_for('static',filename='pictures/'+item.path) }}" alt="image" data-title="{{ item.text }}"
+            <img src="{{ url_for('static',filename='pictures/'+item.path+'@300.jpg') }}" alt="image" data-title="{{ item.text }}"
                  data-subtitle="{{ item.updated_at | date }}">
         {% endfor %}
     </div>
@@ -56,7 +56,7 @@
             if(count>0){
                 let rst = await $.post('/index/load_one_picture', {offset})
                 if (rst.path){
-                    $('.wrap').pinterest('add', '/static/pictures/'+rst.path, rst.text,rst.updated_at)
+                    $('.wrap').pinterest('add', '/static/pictures/'+rst.path+'@300.jpg', rst.text,rst.updated_at)
                     count--
                     loadmore(count)
                 }
